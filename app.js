@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-osebobo:osebobo21@cluster0.ovulv.mongodb.net/todolistDB", {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false});
+mongoose.connect("mongodb+srv://" + process.env.CLIENT_ID + "/todolistDB", {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false});
 
 const itemsSchema = {
   name: String
@@ -20,7 +20,7 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 const item1 = new Item({
-  name: "WElcome to your todolist!"
+  name: "Welcome to your todolist!"
 });
 
 const item2 = new Item({
